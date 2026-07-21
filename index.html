@@ -6,6 +6,127 @@
 <title>Toifur Rahman — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Caveat:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="style.css">
+<style>
+/* ── Modal Overlay ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open {
+  display: flex;
+}
+
+/* ── Modal Box ── */
+.modal-box {
+  background: var(--card, #111);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+  animation: modal-in 0.25s ease;
+}
+@keyframes modal-in {
+  from { opacity:0; transform: translateY(20px) scale(0.97); }
+  to   { opacity:1; transform: translateY(0) scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--fg, #fff);
+  border-radius: 8px;
+  width: 32px; height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.1); }
+
+.modal-title {
+  font-family: var(--display, 'Syne', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.modal-sub {
+  font-size: 0.85rem;
+  color: var(--muted, #888);
+  margin-bottom: 24px;
+}
+
+/* ── Gallery Grid ── */
+.modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 9/19;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.04);
+}
+.gallery-caption {
+  font-size: 0.78rem;
+  color: var(--muted, #888);
+  text-align: center;
+  font-family: var(--hand, 'Caveat', cursive);
+  font-size: 0.92rem;
+}
+
+/* ── Proj card action row ── */
+.proj-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.proj-link {
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--fg, #fff);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.proj-link:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.3);
+}
+.proj-link.hl {
+  background: var(--accent, #d4ff00);
+  color: #000;
+  border-color: transparent;
+  font-weight: 600;
+}
+.proj-link.hl:hover { opacity: 0.85; }
+</style>
 </head>
 <body>
 
@@ -17,8 +138,6 @@
     <a href="#exp">exp</a>
     <a href="#work">work</a>
   </div>
-
-  
   <a href="#contact" class="nav-hire">
     hire me <img src="cat.png" alt="" class="nav-cat-png"/>
   </a>
@@ -32,13 +151,12 @@
       M. Toifur
       <span class="italic-part">Rahman.</span>
     </h1>
-    <p class="hero-desc">I’ve always wanted to understand <em>why</em> a system is built, not just how to build it. I’m interested in a career as a System & Business Analyst—but I’m also open to getting hands-on with development.</p>
+    <p class="hero-desc">I've always wanted to understand <em>why</em> a system is built, not just how to build it. I'm interested in a career as a System & Business Analyst—but I'm also open to getting hands-on with development.</p>
     <div class="hero-btns">
       <a href="#work" class="btn-filled">view project →</a>
       <a href="#contact" class="btn-outline">lets chat </a>
     </div>
   </div>
-
   <div>
     <div class="hero-card">
       <div class="card-corner">GPA 3.46 ✓</div>
@@ -72,8 +190,8 @@
   </div>
   <div class="about-short reveal">
     <p class="about-text">
-      I graduated from Telkom University in Surabaya. During my studies, I didn’t just learn how to write code—
-      I was more interested in <strong>why</strong> systems  are built and what real-world problems they’re designed to solve.
+      I graduated from Telkom University in Surabaya. During my studies, I didn't just learn how to write code—
+      I was more interested in <strong>why</strong> systems are built and what real-world problems they're designed to solve.
     </p>
     <div>
       <div style="font-family:var(--hand);font-size:1rem;color:var(--muted);margin-bottom:10px">tools & skills ✏</div>
@@ -151,6 +269,8 @@
     <span class="sec-hdr-deco"></span>
   </div>
   <div class="proj-grid reveal">
+
+    <!-- Aksara Gajang — modal trigger -->
     <div class="proj-card">
       <div class="proj-type">✦ mobile app</div>
       <div class="proj-name">Aksara Gajang</div>
@@ -159,8 +279,17 @@
         <span class="tag hl">React Native</span>
         <span class="tag">Android SDK</span>
         <span class="tag">Figma</span>
+        <span class="tag">SRS</span>
+        <span class="tag">PlantUML</span>
+        <span class="tag">Draw.io</span>
+        <span class="tag">GitHub</span>
+      </div>
+      <div class="proj-actions">
+        <button class="proj-link hl" onclick="openModal()">lihat screenshot ↗</button>
       </div>
     </div>
+
+    <!-- SDN Cabbiya 2 — live link -->
     <div class="proj-card">
       <div class="proj-type">✦ web</div>
       <div class="proj-name">SDN Cabbiya 2</div>
@@ -169,28 +298,33 @@
         <span class="tag hl">Laravel</span>
         <span class="tag">Tailwind</span>
         <span class="tag">MySQL</span>
-      </div>
-    </div>
-    <div class="proj-card">
-      <div class="proj-type">✦ mobile app</div>
-      <div class="proj-name">UrAsst To-Do</div>
-      <p class="proj-desc">Task and personal finance management.</p>
-      <div class="proj-tags">
-        <span class="tag hl">React Native</span>
-        <span class="tag">Trello</span>
-        <span class="tag">Miro</span>
-      </div>
-    </div>
-    <!-- <div class="proj-card">
-      <div class="proj-type">✦ system analysis</div>
-      <div class="proj-name">MarineReport — System Design</div>
-      <p class="proj-desc">Analisis sistem lengkap: use case, activity, robustness, sequence diagram untuk aplikasi pelaporan maritim.</p>
-      <div class="proj-tags">
-        <span class="tag hl">System Analysis</span>
-        <span class="tag">UML</span>
+        <span class="tag">PlantUML</span>
         <span class="tag">Draw.io</span>
+        <span class="tag">PHP 8</span>
+        <span class="tag">Hostinger SSH</span>
       </div>
-    </div> -->
+      <div class="proj-actions">
+        <a href="https://sdncabbiya2.id/" class="proj-link hl" target="_blank" rel="noopener">live site ↗</a>
+      </div>
+    </div>
+
+    <!-- Prakhya — live link -->
+    <div class="proj-card">
+      <div class="proj-type">✦ web</div>
+      <div class="proj-name">Prakhya Tama Cakrawala</div>
+      <p class="proj-desc">Company profile website built during internship using Laravel MVC. Covers service pages, technical documentation, and system design contribution.</p>
+      <div class="proj-tags">
+        <span class="tag hl">Laravel</span>
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Figma</span>
+        <span class="tag">GitHub</span>
+      </div>
+      <div class="proj-actions">
+        <a href="https://prakhya.id/" class="proj-link hl" target="_blank" rel="noopener">live site ↗</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -217,11 +351,68 @@
   <span>© 2026 toifur.r</span>
 </footer>
 
+
+<!-- ══════════════════════════════════════
+     MODAL — Aksara Gajang Screenshots
+     Ganti path gambar sesuai file kamu
+     ══════════════════════════════════════ -->
+<div class="modal-overlay" id="aksaraModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">Aksara Gajang</div>
+    <div class="modal-sub">Mobile app · React Native · Android — screenshot preview</div>
+    <div class="modal-gallery">
+
+      <!-- ─ Ganti src dengan path gambar kamu ─ -->
+      <div class="gallery-item">
+        <img src="assets/LoadingScreen.png" alt="Loading Screen"/>
+        <span class="gallery-caption">Loading Screen</span>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/awal.png" alt="Home"/>
+        <span class="gallery-caption">Home </span>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/quiz.png" alt="Quiz aksara"/>
+        <span class="gallery-caption">Quiz</span>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/Game1.png" alt="Mini game"/>
+        <span class="gallery-caption">Mini Game</span>
+      </div>
+      <div class="gallery-item">
+        <img src="assets/Streak.png" alt="Streak tracking"/>
+        <span class="gallery-caption">Streak</span>
+      </div>
+      <!-- Tambah <div class="gallery-item"> lagi kalau ada lebih banyak gambar -->
+
+    </div>
+  </div>
+</div>
+
+
 <script>
+/* Intersection Observer — reveal on scroll */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on') })
 }, { threshold: 0.08 })
 document.querySelectorAll('.reveal').forEach(el => io.observe(el))
+
+/* Modal */
+function openModal() {
+  document.getElementById('aksaraModal').classList.add('open')
+  document.body.style.overflow = 'hidden'
+}
+function closeModal() {
+  document.getElementById('aksaraModal').classList.remove('open')
+  document.body.style.overflow = ''
+}
+// Klik di luar modal box → tutup
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('aksaraModal')) closeModal()
+}
+// ESC → tutup
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal() })
 </script>
 
 </body>
